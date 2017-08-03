@@ -48,3 +48,165 @@
 			<td class="song-artist"></td>
 			<td class="song-album"></td>
 			<td class="song-duration"></td>
+			</tr>
+		<tr id='song4'>
+			<td class="song-name"></td>
+			<td class="song-artist"></td>
+			<td class="song-album"></td>
+			<td class="song-duration"></td>
+		</tr>
+	</tbody>
+</table>
+        </section>
+        <footer> 
+        <div class="controls">
+        <i class="fa fa-play clickable play-icon" aria-hidden="true"></i>
+<div class="current-song-wrapper">
+    	<img class="current-song-image" height="55" width="55">
+    	<div>
+        	<p class="current-song-name"></p>
+        	<p class="current-song-album"></p>
+    	<audio controls=""></audio>
+	</div></div>
+	
+        </div>
+        </footer>
+        </div>
+    </div>
+    
+    <script src="jquery.js"> </script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"> </script>
+    <script>
+    var songs = [
+	{
+        'name': 'SAAHORE BAAHUBALI',
+        'artist': 'DALER MAHENDI',
+        'album': 'BAAHUBALI 2',
+        'duration': '03:22',
+        'fileName': 'S1.mp3',
+        'image': 'download (2).jpg'
+    },
+    {
+        'name': 'JIO RE',
+        'artist': 'DALER MAHENDI',
+        'album': 'BAAHUBALI 2',
+        'duration': '03:29',
+        'fileName': 'S2.mp3',
+        'image': 'download (3).jpg'
+    },
+    {
+        'name': 'RADIO SONG',
+        'artist': 'PRITAM, KAMAL  KHAN',
+        'album': 'TUBELIGHT',
+        'duration': '04:49',
+        'fileName': 'S3.mp3',
+        'image': 'download (1).jpg'
+    },
+    {
+        'name': 'ZINDA',
+        'artist': 'SHANKAR EHSAAN LOY',
+        'album': 'BHAAG MILKHA BHAAG',
+        'duration': '03:31',
+        'fileName': 'S4.mp3',
+        'image': 'download.jpg'
+    }
+    ]
+    $('.welcome-screen button').on('click', function() {
+        var name = $('#name-input').val();
+        if (name.length > 2) {
+            var message = "Welcome, " + name;
+            $('.main .user-name').text(message);
+            $('.welcome-screen').addClass('hidden');
+            $('.main').removeClass('hidden');
+        } else {
+            $('#name-input').addClass('error');
+        }
+    });
+window.onload = function (){
+		changeCurrentSongDetails(songs[0]);
+	 	for(var i = 0; i < songs.length; i++) {
+	        var obj = songs[i];
+	        var name = '#song' + (i+1);
+	        var song = $(name);
+	        song.find('.song-name').text(obj.name);
+	        song.find('.song-artist').text(obj.artist);
+	        song.find('.song-album').text(obj.album);
+	        song.find('.song-length').text(obj.duration);
+	        addSongNameClickEvent(obj, i + 1);
+    	}
+
+    	$('#songs').DataTable({
+    		paging: false,
+    	});
+	}
+	function toggleSong() {
+		var song = document.querySelector('audio'); 
+		if(song.paused) {
+			song.play();	
+		} else {
+			song.pause();
+		}
+	}
+	function addSongNameClickEvent(songObj, id) {
+		var songName = songObj.name;
+		var fileName = songObj.fileName
+		var id = '#song' + id;
+		function onClick(event){
+		
+			var song = document.querySelector('audio');
+			var currentSong = song.src;
+			if (currentSong.search(fileName) != -1) {
+				toggleSong();
+			} else {
+				changeCurrentSongDetails(songObj);
+				song.src = fileName; 
+				song.play();	
+			}
+		}
+		
+		$(id).on('click', onClick);
+	}
+	function changeCurrentSongDetails(songObj) {
+		var songPath = 'img/' + songObj.image;
+	    $('.current-song-image').attr('src', songPath)
+	    $('.current-song-name').text(songObj.name)
+	    $('.current-song-album').text(songObj.album)
+	}
+
+	function fancyTimeFormat(time)
+{   
+    // Hours, minutes and seconds
+    var hrs = ~~(time / 3600);
+    var mins = ~~((time % 3600) / 60);
+    var secs = time % 60;
+
+    // Output like "1:01" or "4:03:59" or "123:03:59"
+    var ret = "";
+
+    if (hrs > 0) {
+        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+    }
+
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+    ret += "" + secs;
+    return ret;
+}
+setInterval(function(){
+                 var song=document.querySelector('audio');
+
+            $('.current-time').text(fancyTimeFormat(song.currentTime));
+        } , 1000);
+	$('.play-icon').on('click',function(){
+		toggleSong();
+	});
+$('body').on('keypress', function(event) {
+                    if (event.keyCode == 32) {
+                        toggleSong();
+                    }
+            
+            });
+</script>
+</body>
+
+</html>
+
