@@ -5,7 +5,7 @@
     <title> VIRTUAL DRUMKIT</title>
     <link rel="stylesheet" type="text/css" href="font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="main.css">
-    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -62,7 +62,7 @@
         <div class="controls">
         <i class="fa fa-play clickable play-icon" aria-hidden="true"></i>
 <div class="current-song-wrapper">
-    	<img class="current-song-image" height="55" width="55">
+    	<img class="current-song-image" height="80" width="150">
     	<div>
         	<p class="current-song-name"></p>
         	<p class="current-song-album"></p>
@@ -167,7 +167,7 @@ window.onload = function (){
 		$(id).on('click', onClick);
 	}
 	function changeCurrentSongDetails(songObj) {
-		var songPath = 'img/' + songObj.image;
+		var songPath = 'image/' + songObj.image;
 	    $('.current-song-image').attr('src', songPath)
 	    $('.current-song-name').text(songObj.name)
 	    $('.current-song-album').text(songObj.album)
