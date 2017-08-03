@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title> VIRTUAL DRUMKIT</title>
-    <link rel="stylesheet" type="text/css" href="font-awesome.min.css">
+<html><!--This is an HTML tag which is used to tell the browser that it is html language -->
+<head><!--This is an head tag which is used to display the heading -->
+    <meta charset="UTF-8"><!--This tells the encoding -->
+    <title> VIRTUAL DRUMKIT</title><!-- Title of the Project-->
+    <link rel="stylesheet" type="text/css" href="font-awesome.min.css"><!--Here the linnks for the css files are present -->
     <link rel="stylesheet" type="text/css" href="main.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-</head>
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+</head><!-- Here head tag is closed-->
 
-<body>
-    <div class="wrapper">
+<body><!--Here body tag starts -->
+    <div class="wrapper"><!-- Declaration of class-->
         <section class="welcome-screen">
             <h1> HELLO, YOU ARE WELCOME TO MY DJ </h1>
             <h3> Enter name to access your account </h3>
             <div class="input-wrapper">
                 <input type="text" placeholder="Name" id="name-input">
-                <button> Go for it </button>
+                <button> Go for it </button><!-- It is used for Button-->
             </div>
         </section>
         <div class="main">
         <header> <div class="right floated user-name">  </div> </header>
         <section class="content">
-<table id="songs">
-	<thead>
-		<tr>
+<table id="songs"><!--It declares the particular id for the table so that it can be used anywhere without repetition -->
+	<thead><!--The <thead> tag is used to group header content in an HTML table.-->
+		<tr><!-- It opens the table ROW-->
 			<td>Title</td>
 			<td>Artist</td>
-			<td>Album</td>
+			<td>Album</td>    
 			<td>Duration</td>
 		</tr>
 	</thead>
@@ -49,7 +49,7 @@
 			<td class="song-album"></td>
 			<td class="song-duration"></td>
 			</tr>
-		<tr id='song4'>
+		<tr id='song4'><!--Here songs summary are declared -->
 			<td class="song-name"></td>
 			<td class="song-artist"></td>
 			<td class="song-album"></td>
@@ -67,14 +67,14 @@
         	<p class="current-song-name"></p>
         	<p class="current-song-album"></p>
     	<audio controls=""></audio>
-	</div></div>
+	</div></div><!--Division tag is closed -->
 	
         </div>
         </footer>
         </div>
     </div>
     
-    <script src="jquery.js"> </script>
+    <script src="jquery.js"> </script><!--Here Javascript is written -->
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"> </script>
     <script>
     var songs = [
@@ -121,7 +121,7 @@
         } else {
             $('#name-input').addClass('error');
         }
-    });
+    });//here welcome screen is gone or hidden after clicking "go on" button
 window.onload = function (){
 		changeCurrentSongDetails(songs[0]);
 	 	for(var i = 0; i < songs.length; i++) {
@@ -139,7 +139,7 @@ window.onload = function (){
     		paging: false,
     	});
 	}
-	function toggleSong() {
+	function toggleSong() {//Here all the App functions takes place such as Play , Pause etc
 		var song = document.querySelector('audio'); 
 		if(song.paused) {
 			song.play();	
@@ -164,7 +164,7 @@ window.onload = function (){
 			}
 		}
 		
-		$(id).on('click', onClick);
+		$(id).on('click', onClick);//Here Current Song details are shown to us
 	}
 	function changeCurrentSongDetails(songObj) {
 		var songPath = 'image/' + songObj.image;
@@ -191,7 +191,7 @@ window.onload = function (){
     ret += "" + secs;
     return ret;
 }
-setInterval(function(){
+setInterval(function(){//Here Space bar function is worked
                  var song=document.querySelector('audio');
 
             $('.current-time').text(fancyTimeFormat(song.currentTime));
